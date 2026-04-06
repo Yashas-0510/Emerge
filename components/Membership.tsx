@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Zap } from 'lucide-react';
 import SectionReveal from './SectionReveal';
 
 const plans = [
@@ -26,12 +26,12 @@ const plans = [
     period: '/month',
     desc: 'Our most popular plan for serious trainees.',
     features: [
-      'Everything in Starter',
       'Unlimited gym access (24/7)',
       '2 Personal Training sessions/month',
       'Custom workout plan',
       'Monthly progress tracking',
       'Free nutritional guidance',
+      'Access to all group classes',
     ],
     cta: 'Join Pro',
     featured: true,
@@ -56,64 +56,70 @@ const plans = [
 
 export default function Membership() {
   return (
-    <section id="membership" className="py-32 bg-bg relative overflow-hidden">
-      <div className="gradient-orb w-[600px] h-[600px] bg-accent bottom-[-300px] right-[-200px]" />
+    <section id="membership" className="py-32 bg-[#0a0a0a] relative overflow-hidden">
+      {/* Minimal single orb — lime only here */}
+      <div className="gradient-orb w-[600px] h-[600px] bg-[#d4ff00] bottom-[-250px] right-[-200px]" />
 
       <div className="max-w-7xl mx-auto px-6">
-        <SectionReveal className="text-center mb-16">
-          <span className="text-accent font-inter font-semibold tracking-[0.2em] uppercase text-sm">Pricing</span>
-          <h2 className="font-bebas text-5xl md:text-6xl text-white mt-3">
-            CHOOSE YOUR
-            <span className="text-accent"> PATH</span>
-          </h2>
-          <p className="text-muted font-inter mt-4 max-w-xl mx-auto">
-            No lock-in contracts. No hidden fees. Cancel anytime.
-          </p>
+        <SectionReveal className="mb-16">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <span className="text-white/40 font-inter font-semibold tracking-[0.2em] uppercase text-xs">Pricing</span>
+              <h2 className="font-bebas text-5xl md:text-6xl text-white mt-2">
+                Choose Your <span className="text-[#d4ff00]">Path</span>
+              </h2>
+            </div>
+            <p className="text-white/40 font-inter text-sm max-w-xs">
+              No lock-in contracts. No hidden fees. Cancel anytime.
+            </p>
+          </div>
         </SectionReveal>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {/* Horizontal scroll cards */}
+        <div className="membership-scroll">
           {plans.map((plan, i) => (
             <SectionReveal key={plan.name} delay={i * 0.1}>
               <motion.div
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -6 }}
                 transition={{ duration: 0.3 }}
-                className={`relative rounded-2xl p-8 h-full flex flex-col ${
+                className={`pricing-card ${
                   plan.featured
-                    ? 'bg-surface border-2 border-accent'
-                    : 'bg-surface border border-white/10'
+                    ? 'bg-[#1a1a1a] border-2 border-[#d4ff00] relative'
+                    : 'bg-[#111] border border-white/8'
                 }`}
               >
                 {plan.featured && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-black font-inter font-bold text-xs uppercase tracking-wider px-4 py-1 rounded-full">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-[#d4ff00] text-black font-inter font-bold text-[10px] uppercase tracking-wider px-4 py-1.5 rounded-full">
+                    <Zap className="w-3 h-3" />
                     Most Popular
                   </div>
                 )}
 
                 <div className="mb-6">
                   <h3 className="font-bebas text-2xl text-white tracking-wide">{plan.name}</h3>
-                  <p className="text-muted font-inter text-sm mt-1">{plan.desc}</p>
+                  <p className="text-white/40 font-inter text-xs mt-1">{plan.desc}</p>
                 </div>
 
                 <div className="mb-8">
                   <span className="font-bebas text-5xl text-white">{plan.price}</span>
-                  <span className="text-muted font-inter text-sm">{plan.period}</span>
+                  <span className="text-white/40 font-inter text-xs">{plan.period}</span>
                 </div>
 
-                <ul className="space-y-3 mb-8 flex-1">
+                <ul className="space-y-3 mb-10 flex-1">
                   {plan.features.map((feat) => (
                     <li key={feat} className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-                      <span className="text-gray-300 font-inter text-sm">{feat}</span>
+                      <Check className={`w-4 h-4 mt-0.5 shrink-0 ${plan.featured ? 'text-[#d4ff00]' : 'text-white/30'}`} />
+                      <span className="text-gray-300 font-inter text-xs leading-relaxed">{feat}</span>
                     </li>
                   ))}
                 </ul>
 
                 <a
                   href="#contact"
-                  className={`block text-center py-3 rounded font-inter font-semibold text-sm uppercase tracking-wider transition-colors ${
+                  className={`block text-center py-3.5 rounded font-inter font-semibold text-xs uppercase tracking-[0.15em] transition-colors ${
                     plan.featured
-                      ? 'bg-accent text-black hover:bg-white'
-                      : 'bg-white/10 text-white hover:bg-accent hover:text-black'
+                      ? 'bg-[#d4ff00] text-black hover:bg-white'
+                      : 'bg-white/8 text-white hover:bg-[#d4ff00] hover:text-black'
                   }`}
                 >
                   {plan.cta}

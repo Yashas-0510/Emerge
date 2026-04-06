@@ -1,49 +1,59 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import SectionReveal from './SectionReveal';
 
 const images = [
-  'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80',
-  'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80',
-  'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&q=80',
-  'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
-  'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=600&q=80',
-  'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80',
+  { src: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=700&q=80', alt: 'Emerge gym floor' },
+  { src: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=700&q=80', alt: 'Training area' },
+  { src: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=700&q=80', alt: 'Weights section' },
+  { src: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=700&q=80', alt: 'Cardio zone' },
+  { src: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=700&q=80', alt: 'Group class' },
+  { src: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=700&q=80', alt: 'Personal training' },
 ];
 
 export default function Gallery() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section id="gallery" className="py-32 bg-bg relative overflow-hidden">
-      <div className="gradient-orb w-[500px] h-[500px] bg-accent top-[-100px] right-[-200px]" />
+    <section id="gallery" className="py-32 bg-[#0a0a0a] relative overflow-hidden">
+      {/* Single restrained orb */}
+      <div className="gradient-orb w-[400px] h-[400px] bg-[#d4ff00] top-[-100px] right-[-150px]" />
 
       <div className="max-w-7xl mx-auto px-6">
-        <SectionReveal className="text-center mb-16">
-          <span className="text-accent font-inter font-semibold tracking-[0.2em] uppercase text-sm">Gallery</span>
-          <h2 className="font-bebas text-5xl md:text-6xl text-white mt-3">
-            THE
-            <span className="text-accent"> SPACE</span>
-          </h2>
+        <SectionReveal className="mb-12">
+          <div className="flex items-end justify-between">
+            <div>
+              <span className="text-white/40 font-inter font-semibold tracking-[0.2em] uppercase text-xs">Gallery</span>
+              <h2 className="font-bebas text-5xl md:text-6xl text-white mt-2">
+                The <span className="text-[#d4ff00]">Space</span>
+              </h2>
+            </div>
+            <p className="text-white/30 font-inter text-xs hidden md:block">
+              Drag to explore →
+            </p>
+          </div>
         </SectionReveal>
+      </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {images.map((src, i) => (
-            <SectionReveal key={i} delay={i * 0.06}>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.3 }}
-                className="relative rounded-xl overflow-hidden aspect-square cursor-pointer"
-              >
-                <img
-                  src={src}
-                  alt={`Emerge gym gallery ${i + 1}`}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-accent/0 hover:bg-accent/10 transition-colors" />
-              </motion.div>
-            </SectionReveal>
-          ))}
-        </div>
+      {/* Full-bleed horizontal scroll */}
+      <div className="gallery-scroll mt-4 px-6 pb-2" ref={scrollRef}>
+        {images.map((img, i) => (
+          <SectionReveal key={i} delay={i * 0.06}>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.4 }}
+              className="gallery-item"
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                loading="lazy"
+              />
+            </motion.div>
+          </SectionReveal>
+        ))}
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ import { Menu, X, Dumbbell } from 'lucide-react';
 
 const navLinks = [
   { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
+  { label: 'Programs', href: '#about' },
   { label: 'Membership', href: '#membership' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'Contact', href: '#contact' },
@@ -30,35 +30,35 @@ export default function Nav() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-black/90 backdrop-blur-md border-b border-white/10'
+            ? 'bg-black/90 backdrop-blur-md border-b border-white/5'
             : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 bg-accent rounded flex items-center justify-center">
+          {/* Logo — lime only on icon */}
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 bg-[#d4ff00] rounded flex items-center justify-center">
               <Dumbbell className="w-5 h-5 text-black" />
             </div>
-            <span className="font-bebas text-2xl tracking-wider text-white group-hover:text-accent transition-colors">
+            <span className="font-bebas text-2xl tracking-widest text-white group-hover:text-white/80 transition-colors">
               EMERGE
             </span>
           </a>
 
-          {/* Desktop links */}
+          {/* Desktop links — no lime, just white/gray */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-inter tracking-wide text-gray-300 hover:text-accent transition-colors uppercase"
+                className="text-xs font-inter tracking-[0.15em] text-white/50 hover:text-white transition-colors uppercase"
               >
                 {link.label}
               </a>
             ))}
             <a
               href="#contact"
-              className="ml-4 px-5 py-2 bg-accent text-black font-inter font-semibold text-sm uppercase tracking-wide rounded hover:bg-white transition-colors"
+              className="ml-2 px-5 py-2 bg-[#d4ff00] text-black font-inter font-semibold text-xs uppercase tracking-[0.12em] rounded hover:bg-white transition-colors"
             >
               Join Now
             </a>
@@ -86,7 +86,7 @@ export default function Nav() {
             className="fixed inset-0 z-[60] bg-black flex flex-col"
           >
             <div className="flex justify-between items-center px-6 py-4">
-              <span className="font-bebas text-2xl text-white tracking-wider">EMERGE</span>
+              <span className="font-bebas text-2xl text-white tracking-widest">EMERGE</span>
               <button onClick={() => setMobileOpen(false)} aria-label="Close menu">
                 <X className="w-6 h-6 text-white" />
               </button>
@@ -99,8 +99,8 @@ export default function Nav() {
                   onClick={() => setMobileOpen(false)}
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                  className="text-3xl font-bebas text-white hover:text-accent transition-colors tracking-wide"
+                  transition={{ delay: i * 0.07 }}
+                  className="text-3xl font-bebas text-white hover:text-[#d4ff00] transition-colors tracking-wide"
                 >
                   {link.label}
                 </motion.a>
@@ -111,7 +111,7 @@ export default function Nav() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="mt-6 px-6 py-3 bg-accent text-black font-bebas text-xl text-center rounded uppercase tracking-wider"
+                className="mt-6 px-6 py-3.5 bg-[#d4ff00] text-black font-bebas text-xl text-center rounded uppercase tracking-wider"
               >
                 Join Now
               </motion.a>

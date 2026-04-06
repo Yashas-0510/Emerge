@@ -33,8 +33,125 @@
   pointer-events: none;
 }
 
+/* Marquee ticker */
+.marquee-track {
+  display: flex;
+  gap: 4rem;
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-track span {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.marquee-track .dot {
+  color: #d4ff00;
+  font-size: 0.6rem;
+  vertical-align: middle;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Horizontal scroll gallery */
+.gallery-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  cursor: grab;
+}
+
+.gallery-scroll:active {
+  cursor: grabbing;
+}
+
+.gallery-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.gallery-scroll::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.gallery-scroll::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 2px;
+}
+
+.gallery-scroll .gallery-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 320px;
+  height: 400px;
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-scroll .gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-scroll .gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Membership horizontal scroll */
+.membership-scroll {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 2rem 1rem 3rem;
+  align-items: stretch;
+}
+
+.membership-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.membership-scroll::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+.membership-scroll::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 2px;
+}
+
+.membership-scroll .pricing-card {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  width: 320px;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+}
+
+/* Scroll indicator bounce */
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0a0a0a; }
 ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #d4ff00; }
+::-webkit-scrollbar-thumb:hover { background: #555; }

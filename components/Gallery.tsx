@@ -14,36 +14,36 @@ const images = [
 ];
 
 export default function Gallery() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   return (
-    <section id="gallery" className="py-32 bg-[#0a0a0a] relative overflow-hidden">
-      {/* Single restrained orb */}
-      <div className="gradient-orb w-[400px] h-[400px] bg-[#d4ff00] top-[-100px] right-[-150px]" />
+    <section id="gallery" className="relative py-40 overflow-hidden bg-black">
+      {/* Ambient blobs */}
+      <div className="blob blob-c" />
 
       <div className="max-w-7xl mx-auto px-6">
-        <SectionReveal className="mb-12">
-          <div className="flex items-end justify-between">
-            <div>
-              <span className="text-white/40 font-inter font-semibold tracking-[0.2em] uppercase text-xs">Gallery</span>
-              <h2 className="font-bebas text-5xl md:text-6xl text-white mt-2">
-                The <span className="text-[#d4ff00]">Space</span>
-              </h2>
-            </div>
-            <p className="text-white/30 font-inter text-xs hidden md:block">
-              Drag to explore →
-            </p>
+        {/* Section label */}
+        <SectionReveal>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="h-px w-12" style={{ background: 'rgba(212,255,0,0.3)' }} />
+            <span className="text-[10px] font-inter font-semibold tracking-[0.4em] uppercase text-white/30">
+              Gallery
+            </span>
           </div>
+          <h2
+            className="font-bebas text-white mb-14"
+            style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', letterSpacing: '-0.02em', lineHeight: 0.9 }}
+          >
+            The <span className="text-[#d4ff00] text-glow-subtle">Space</span>
+          </h2>
         </SectionReveal>
       </div>
 
       {/* Full-bleed horizontal scroll */}
-      <div className="gallery-scroll mt-4 px-6 pb-2" ref={scrollRef}>
+      <div className="gallery-scroll mt-2 px-6 pb-2">
         {images.map((img, i) => (
-          <SectionReveal key={i} delay={i * 0.06}>
+          <SectionReveal key={i} delay={i * 0.07}>
             <motion.div
               whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="gallery-item"
             >
               <img
@@ -51,6 +51,8 @@ export default function Gallery() {
                 alt={img.alt}
                 loading="lazy"
               />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
             </motion.div>
           </SectionReveal>
         ))}
